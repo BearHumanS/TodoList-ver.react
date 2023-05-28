@@ -43,9 +43,11 @@ function TodoList() {
   }
 
   const deleteTodo = async id => {
-    await TodoService.deleteTodo(id)
-    const updatedTodos = todos.filter(todo => todo.id !== id)
-    setTodos(updatedTodos)
+    if (confirm('삭제할까요?')) {
+      await TodoService.deleteTodo(id)
+      const updatedTodos = todos.filter(todo => todo.id !== id)
+      setTodos(updatedTodos)
+    }
   }
 
   if (loading) {
