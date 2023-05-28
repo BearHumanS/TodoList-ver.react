@@ -21,6 +21,9 @@
     height: 370px;
     overflow-y: scroll;
 }
+.todo-container .list::-webkit-scrollbar{
+    display:none;
+  }
 .todo-container .list > li {
     display: flex;
     justify-content:space-around;
