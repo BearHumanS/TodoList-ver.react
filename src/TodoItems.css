@@ -1,0 +1,45 @@
+
+
+.todo-container {
+    position: relative;
+    width: 100%;
+}
+.todo-container .title {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+}
+.todo-container .title .title-input {
+    width: 500px;
+    height: 30px;
+    box-sizing: border-box;
+}
+.todo-container .title .title-input:hover {
+    border: 2px solid;
+}
+.todo-container .list {
+    height: 370px;
+    overflow-y: scroll;
+}
+.todo-container .list > li {
+    display: flex;
+    justify-content:space-around;
+    margin: 50px 0;
+    font-size: 24px;
+}
+.todo-container .edit-input {
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    width: 300px;
+    box-sizing: border-box;
+}
+.todo-container .edit-input:hover {
+    border: 2px solid;
+}
+
+input[type="checkbox"]{
+    width: 30px; 
+    height: 30px;
+    cursor: pointer;
+}
