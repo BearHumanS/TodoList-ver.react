@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import TodoService from './TodoService'
-import Todos from './Todos'
+import TodoItems from './TodoItems'
 
 function TodoList() {
   const [todos, setTodos] = useState([])
@@ -9,10 +9,10 @@ function TodoList() {
   const [titleInputVals, setTitleInputVals] = useState('')
 
   useEffect(() => {
-    fetchTodos()
+    getTodos()
   }, [])
 
-  const fetchTodos = async () => {
+  const getTodos = async () => {
     const todosData = await TodoService.getTodos()
     setTodos(todosData)
     setLoading(false)
@@ -44,9 +44,13 @@ function TodoList() {
 
   const deleteTodo = async id => {
     if (confirm('삭제할까요?')) {
-      await TodoService.deleteTodo(id)
-      const updatedTodos = todos.filter(todo => todo.id !== id)
-      setTodos(updatedTodos)
+      try {
+        await TodoService.deleteTodo(id)
+        const updatedTodos = todos.filter(todo => todo.id !== id)
+        setTodos(updatedTodos)
+      } catch (error) {
+        alert(error)
+      }
     }
   }
 
@@ -56,7 +60,7 @@ function TodoList() {
 
   return (
     <>
-      <Todos
+      <TodoItems
         titleInputVals={titleInputVals}
         setInputVal={setInputVal}
         setTitleInputVals={setTitleInputVals}

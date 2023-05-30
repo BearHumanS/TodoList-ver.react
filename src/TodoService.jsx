@@ -1,19 +1,17 @@
 import axios from 'axios'
 
-const headers = {
-  apikey: 'KDT5_nREmPe9B',
-  username: 'KDT5_NamKiHu'
+const HEADERS = {
+  APIKEY: 'KDT5_nREmPe9B',
+  USERNAME: 'KDT5_NamKiHu'
 }
+const URL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/todos'
 
-const TodoService = {
-  getTodos: async () => {
+const todoService = {
+  async getTodos() {
     try {
-      const response = await axios.get(
-        'https://asia-northeast3-heropy-api.cloudfunctions.net/api/todos',
-        {
-          headers
-        }
-      )
+      const response = await axios.get(`${URL}`, {
+        headers: HEADERS
+      })
       return response.data
     } catch (error) {
       console.error(error)
@@ -21,15 +19,15 @@ const TodoService = {
     }
   },
 
-  createTodo: async title => {
+  async createTodo(title) {
     try {
       const response = await axios.post(
-        'https://asia-northeast3-heropy-api.cloudfunctions.net/api/todos',
+        `${URL}`,
         {
           title: title
         },
         {
-          headers
+          headers: HEADERS
         }
       )
       return response.data
@@ -39,34 +37,27 @@ const TodoService = {
     }
   },
 
-  updateTodo: async (id, updatedTodo) => {
+  async updateTodo(id, updatedTodo) {
     try {
-      const response = await axios.put(
-        `https://asia-northeast3-heropy-api.cloudfunctions.net/api/todos/${id}`,
-        updatedTodo,
-        {
-          headers
-        }
-      )
+      const response = await axios.put(`${URL}/${id}`, updatedTodo, {
+        headers: HEADERS
+      })
       return response.data
     } catch (error) {
-      console.error(error)
-      return null
+      alert(error)
+      return console.error(error)
     }
   },
 
-  deleteTodo: async id => {
+  async deleteTodo(id) {
     try {
-      await axios.delete(
-        `https://asia-northeast3-heropy-api.cloudfunctions.net/api/todos/${id}`,
-        {
-          headers
-        }
-      )
+      await axios.delete(`${URL}/${id}`, {
+        headers: HEADERS
+      })
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-export default TodoService
+export default todoService

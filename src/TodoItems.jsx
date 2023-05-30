@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import './TodoItems.css'
 
 export default function TodoItems({
@@ -12,9 +12,8 @@ export default function TodoItems({
   deleteTodo
 }) {
   const [focusedItemId, setFocusedItemId] = useState(null)
-  const inputRef = useRef(null)
 
-  const handleInputChange = e => {
+  const handleInputValue = e => {
     setInputVal(e.target.value)
   }
 
@@ -64,7 +63,7 @@ export default function TodoItems({
           className="title-input"
           type="text"
           value={inputVal}
-          onChange={handleInputChange}
+          onChange={handleInputValue}
           onKeyDown={handleEnter}
         />
         <button onClick={handleButtonClick}>Add</button>
@@ -81,7 +80,6 @@ export default function TodoItems({
               }}
             />
             <input
-              ref={inputRef}
               className="edit-input"
               type="text"
               value={
